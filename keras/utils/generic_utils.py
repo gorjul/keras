@@ -374,7 +374,10 @@ class Progbar(object):
         self._seen_so_far = current
 
         now = time.time()
-        info = ' - %.0fs' % (now - self._start)
+        time_elapsed = now - self._start
+        time_elapsed_format = ('%d:%02d:%02d' % (time_elapsed // 3600, (time_elapsed % 3600) // 60, time_elapsed % 60))
+        info = ' - %s (%.0fs)' % (time_elapsed_format, time_elapsed)
+        # info = ' - %.0fs' % (now - self._start)
         if self.verbose == 1:
             if (now - self._last_update < self.interval and
                     self.target is not None and current < self.target):
